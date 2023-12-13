@@ -6,6 +6,7 @@ Authors of the Repo are; THE GRYFFINDORS
 ---
 
 We will work on the mandatory tasks First ISA (6 Tasks)
+
 0. push, pall
 1. pint
 2. pop
