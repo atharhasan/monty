@@ -1,26 +1,27 @@
 #include "monty.h"
+#include <stdio.h>
+
 
 void proc_file(const char *filename)
 {
-	stack_t *stack = NULL;
+	stack_t **stack = NULL;
 	char *line = NULL;
 	char *opcode;
-	int len = 0;
+	size_t len = 0;
+	char *get_line;
 	unsigned int line_number = 0;
-	char *n;
 	FILE *file = fopen(filename, "r");
 
-	if (file == NULL)
+	if (file == NULL || filename == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
 	}
 
-	n = fgets(line, len, file);
-	while (n != NULL)
+	get_line = fgets(line, len, file);
+	while (get_line != NULL)
 	{
 		line_number++;
-
 		/* Remove newline character*/
 		line[strcspn(line, "\n")] = '\0';
 
@@ -30,9 +31,9 @@ void proc_file(const char *filename)
 		if (opcode != NULL)
 		{
 			if (strcmp(opcode, "push") == 0)
-				push(&stack, line_number);
+				push(stack, line_number);
 			else if (strcmp(opcode, "pall") == 0)
-				pall(&stack, line_number);
+				pall(stack);
 			/* Add more opcode handlers as needed*/
 			else
 			{

@@ -45,6 +45,6 @@ void push(stack_t **ptr, unsigned int line)
     if (*stack != NULL)
         (*stack)->prev = new_node;
 
-    Update the stack pointer
+     Update the stack pointer
     *stack = new_node;*/
 }
