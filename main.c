@@ -16,5 +16,5 @@ int main(int argc, char *argv[])
     filename = argv[1];
     proc_file(filename);
 
-    return 0;
+    return (0);
 }
