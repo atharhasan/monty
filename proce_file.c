@@ -2,13 +2,12 @@
 #include <stdio.h>
 
 
-void proc_file(const char *filename)
+void proc_file(const char *filename, stack_t **stack)
 {
-	stack_t **stack = NULL;
 	char *line = NULL;
 	char *opcode;
 	size_t len = 0;
-	char *get_line;
+	int get_line;
 	unsigned int line_number = 0;
 	FILE *file = fopen(filename, "r");
 
@@ -18,8 +17,8 @@ void proc_file(const char *filename)
 		exit(EXIT_FAILURE);
 	}
 
-	get_line = fgets(line, len, file);
-	while (get_line != NULL)
+	get_line = getline(&line, &len, file);
+	while (get_line != -1)
 	{
 		line_number++;
 		/* Remove newline character*/

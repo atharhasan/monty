@@ -44,6 +44,6 @@ typedef struct instruction_s
 int _putchar(char c);
 void push(stack_t **ptr, unsigned int line);
 void pall(stack_t **stack);
-void proc_file(const char *filename);
+void proc_file(const char *filename, stack_t **stack);
 
 #endif
