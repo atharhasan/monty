@@ -1,7 +1,7 @@
 #include "monty.h"
 #include <stdio.h>
 
-void proc_file(const char *filename, stack_t **stack)
+void proc_file(const char *filename)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -19,7 +19,7 @@ void proc_file(const char *filename, stack_t **stack)
 	while (get_line != -1)
 	{
 		line_number++;
-		format = sper_line(line, line_number, format, stack);
+		format = sper_line(line, line_number, format);
 	}
 
 	/* Clean up (free memory)*/
@@ -27,17 +27,16 @@ void proc_file(const char *filename, stack_t **stack)
 }
 
 /**
- * sper_line - Separates each line into tokens to determine
- * which function to call
- * @buffer: line from the file
+ * sper_line - Put each line into token
+ * @line: line
  * @line_number: line number
- * @format:  storage format. If 0 Nodes will be entered as a stack.
+ * @format: storage format. If 0 Nodes will be entered as a stack.
  * if 1 nodes will be entered as a queue.
- * Return: Returns 0 if the opcode is stack. 1 if queue.
+ * Return: Returns same as Format
  */
-int sper_line(char *line, int line_number, int format, stack_t **stack)
+int sper_line(char *line, int line_number, int format)
 {
-	char *opcode;
+	char *opcode, *val;
 	const char *delim = "\n ";
 
 	if (line == NULL)
@@ -48,17 +47,53 @@ int sper_line(char *line, int line_number, int format, stack_t **stack)
 	opcode = strtok(line, delim);
 	if (opcode == NULL)
 		return (format);
-	/*value = strtok(NULL, delim);*/
+	val = strtok(NULL, delim);
 
 	if (strcmp(opcode, "push") == 0)
-		push(stack, line_number);
-	else if (strcmp(opcode, "pall") == 0)
-		pall(stack);
-	/* Add more opcode handlers as needed*/
-	else
+		return (0);
+	if (strcmp(opcode, "pall") == 0)
+		return (1);
+
+	get_func(opcode, val, line_number);
+	return (format);
+}
+
+/**
+ * get_func - get the appropriate function for the opcode
+ * @opcode: opcode
+ * @val: argument of the opcode
+ * @format:  storage format. If 0 Nodes will be entered as a stack.
+ * @line_number: line number
+ * if 1 nodes will be entered as a queue.
+ * Return: void
+ */
+
+void get_func(char *opcode, char *value, int line_number)
+{
+	int j;
+	int mark;
+
+		instruction_t func_arr[] = {
+		{"push", push},
+		{"pall", pall},
+		{NULL, NULL}
+		};
+
+	if (opcode[0] == '#')
+		return;
+
+	for (mark = 1, j = 0; func_arr[j].opcode != NULL; j++)
 	{
-		fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+		if(strcmp(opcode, func_arr[j].opcode) == 0)
+		{
+			run_fun(func_arr[j].f, opcode, value, line_number);
+			mark = 0;
+		}
+	}
+
+	if (mark == 1)
+	{
+		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 		exit(EXIT_FAILURE);
 	}
-	return (format);
 }
