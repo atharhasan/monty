@@ -1,7 +1,7 @@
 #include "monty.h"
 #include <stdio.h>
 
-void proc_file(const char *filename)
+void proc_file(char *filename)
 {
 	char *line = NULL;
 	size_t len = 0;
@@ -17,9 +17,8 @@ void proc_file(const char *filename)
 
 
 	get_line = getline(&line, &len, file);
-	while (get_line != -1)
+	for (line_number = 1; get_line != -1; line_number++)
 	{
-		line_number++;
 		format = sper_line(line, line_number, format);
 	}
 

@@ -6,7 +6,7 @@ stack_t *head = NULL;
  */
 int main(int argc, char *argv[])
 {
-    const char *filename;
+    char *filename;
 
     if (argc != 2)
     {

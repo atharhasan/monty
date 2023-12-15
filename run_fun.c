@@ -32,8 +32,8 @@ void run_fun(op_func func, char *op, char *val, int ln, int format)
 		{
 			if (isdigit(val[i]) == 0)
 			{
-			fprintf(stderr, "L%d: usage: push integer\n", ln);
-			exit(EXIT_FAILURE);
+				fprintf(stderr, "L%d: usage: push integer\n", ln);
+				exit(EXIT_FAILURE);
 			}
 		}
 	
