@@ -54,7 +54,7 @@ int sper_line(char *line, int line_number, int format)
 	if (strcmp(opcode, "pall") == 0)
 		return (1);
 
-	get_func(opcode, val, line_number, format);
+	get_func(opcode, val, line_number);
 	return (format);
 }
 
@@ -68,7 +68,7 @@ int sper_line(char *line, int line_number, int format)
  * Return: void
  */
 
-void get_func(char *opcode, char *value, int line_number, int format)
+void get_func(char *opcode, char *value, int line_number)
 {
 	int j;
 	int mark;
@@ -86,7 +86,7 @@ void get_func(char *opcode, char *value, int line_number, int format)
 	{
 		if(strcmp(opcode, func_arr[j].opcode) == 0)
 		{
-			run_fun(func_arr[j].f, opcode, value, line_number, format);
+			run_fun(opcode, value, line_number);
 			mark = 0;
 		}
 	}

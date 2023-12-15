@@ -44,15 +44,11 @@ typedef void (*op_func)(stack_t **, unsigned int);
 
 
 int _putchar(char c);
-void push(stack_t **new_node, unsigned int line);
+void push(stack_t **ptr, unsigned int line);
 void pall(stack_t **stack, unsigned int line_number);
 void proc_file(char *filename);
 int sper_line(char *line, int line_number, int format);
-void get_func(char *opcode, char *value, int line_number, int format);
-void run_fun(op_func func, char *op, char *val, int ln, int format);
-
-stack_t *create_node(int n);
-void free_nodes(void);
-void add_to_queue(stack_t **new_node, __attribute__((unused))unsigned int ln);
+void get_func(char *opcode, char *value, int line_number);
+void run_fun( char *op, char *val, int ln);
 
 #endif
