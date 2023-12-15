@@ -45,5 +45,7 @@ int _putchar(char c);
 void push(stack_t **ptr, unsigned int line);
 void pall(stack_t **stack);
 void proc_file(const char *filename, stack_t **stack);
+int sper_line(char *line, int line_number, int format, stack_t **stack);
+
 
 #endif
