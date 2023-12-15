@@ -39,14 +39,13 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-extern stack_t *head;
 typedef void (*op_func)(stack_t **, unsigned int);
 
 
 int _putchar(char c);
 void push(stack_t **ptr, unsigned int line);
 void pall(stack_t **stack, unsigned int line_number);
-void proc_file(char *filename);
+void proc_file(char *filename, stack_t **stack);
 int sper_line(char *line, int line_number, int format);
 void get_func(char *opcode, char *value, int line_number);
 void run_fun( char *op, char *val, int ln);

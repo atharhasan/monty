@@ -1,12 +1,11 @@
 #include "monty.h"
-#include <stdio.h>
 
-void proc_file(char *filename)
+void proc_file(char *filename, stack_t **stack)
 {
 	char *line = NULL;
+	char *opcode;
 	size_t len = 0;
-	int get_line;
-	int line_number, format = 0;
+	unsigned int line_number = 0;
 	FILE *file = fopen(filename, "r");
 
 	if (file == NULL || filename == NULL)
@@ -15,11 +14,25 @@ void proc_file(char *filename)
 		exit(EXIT_FAILURE);
 	}
 
-
-	get_line = getline(&line, &len, file);
-	for (line_number = 1; get_line != -1; line_number++)
+	while (getline(&line, &len, file) != -1)
 	{
-		format = sper_line(line, line_number, format);
+		line_number++;
+		line[strcspn(line, "\n")] = '\0';
+
+		opcode = strtok(line, " ");
+
+		if (opcode != NULL)
+		{
+			if (strcmp(opcode, "push") == 0)
+				push(stack, line_number);
+			else if (strcmp(opcode, "pall") == 0)
+				pall(stack, line_number);
+			else
+			{
+				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
+				exit(EXIT_FAILURE);
+			}
+		}
 	}
 
 	free(line);
@@ -73,18 +86,17 @@ void get_func(char *opcode, char *value, int line_number)
 	int j;
 	int mark;
 
-		instruction_t func_arr[] = {
+	instruction_t func_arr[] = {
 		{"push", push},
 		{"pall", pall},
-		{NULL, NULL}
-		};
+		{NULL, NULL}};
 
 	if (opcode[0] == '#')
 		return;
 
 	for (mark = 1, j = 0; func_arr[j].opcode != NULL; j++)
 	{
-		if(strcmp(opcode, func_arr[j].opcode) == 0)
+		if (strcmp(opcode, func_arr[j].opcode) == 0)
 		{
 			run_fun(opcode, value, line_number);
 			mark = 0;

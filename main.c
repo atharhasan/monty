@@ -1,5 +1,4 @@
 #include "monty.h"
-stack_t *head = NULL;
 
 /**
  * main - main function for testing
@@ -7,6 +6,7 @@ stack_t *head = NULL;
 int main(int argc, char *argv[])
 {
     char *filename;
+    stack_t *stack = NULL;
 
     if (argc != 2)
     {
@@ -15,15 +15,15 @@ int main(int argc, char *argv[])
     }
 
     filename = argv[1];
-    proc_file(filename);
-	
-    while (head != NULL)
+    proc_file(filename, &stack);
+
+    while (stack != NULL)
     {
-        stack_t *temp = head;
-        head = head->next;
+        stack_t *temp = stack;
+        stack = stack->next;
         free(temp);
     }
 
-    return (0);
+    return 0;
 }
 
