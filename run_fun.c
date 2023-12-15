@@ -10,10 +10,10 @@
  * 1 for a queue.
  */
 
-void run_fun(op_func func, char *op, char *val, int ln)
+void run_fun(op_func func, char *op, char *val, int ln, int format)
 {
-	/*stack_t *node;
-	int flag  = 1;*/
+	stack_t *node;
+	int flag  = 1;
 	int i;
 
 	if (strcmp(op, "push") == 0)
@@ -21,7 +21,7 @@ void run_fun(op_func func, char *op, char *val, int ln)
 		if (val != NULL && val[0] == '-')
 		{
 			val = val + 1;
-			/*flag = -1;*/
+			flag = -1;
 		}
 		if (val == NULL)
 		{
@@ -36,13 +36,13 @@ void run_fun(op_func func, char *op, char *val, int ln)
 			exit(EXIT_FAILURE);
 			}
 		}
-	}
-		/*node = create_node(atoi(val) * flag);
+	
+		node = create_node(atoi(val) * flag);
 		if (format == 0)
 			func(&node, ln);
 		if (format == 1)
 			add_to_queue(&node, ln);
-	}*/
+	}
 	else
 		func(&head, ln);
 }

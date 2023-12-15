@@ -2,22 +2,30 @@
 stack_t *head = NULL;
 
 /**
- * main - entry point
- * @argc: arguments count
- * @argv: list of arguments
- * Return: always 0
+ * main - main function for testing
  */
-
 int main(int argc, char *argv[])
 {
-	if (argc != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
-	open_file(argv[1]);
+    const char *filename;
+
+    if (argc != 2)
+    {
+        fprintf(stderr, "USAGE: %s file\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    filename = argv[1];
+    proc_file(filename);
 	free_nodes();
-	return (0);
+
+    while (head != NULL)
+    {
+        stack_t *temp = head;
+        head = head->next;
+        free(temp);
+    }
+
+    return (0);
 }
 
 /**
@@ -31,7 +39,8 @@ stack_t *create_node(int n)
 
 	node = malloc(sizeof(stack_t));
 	if (node == NULL)
-		err(4);
+		fprintf(stderr, "Error: malloc failed\n");
+        exit(EXIT_FAILURE);
 	node->next = NULL;
 	node->prev = NULL;
 	node->n = n;
