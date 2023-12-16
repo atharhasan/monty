@@ -39,6 +39,10 @@ void proc_file(char *filename, stack_t **stack)
 				add(stack, line_number);
 			else if (strcmp(opcode, "nop") == 0)
 				nop(stack, line_number);
+			else if (strcmp(opcode, "sub") == 0)
+				sub(stack, line_number);
+			else if (strcmp(opcode, "div") == 0)
+				divs(stack, line_number);
 			else
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
@@ -104,6 +108,8 @@ void get_func(char *opcode, char *value, int line_number)
 		{"swap", swap},
 		{"add", add},
 		{"nop", nop},
+		{"sub", sub},
+		{"div", divs},
 		{NULL, NULL}};
 
 	if (opcode[0] == '#')
