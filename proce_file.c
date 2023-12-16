@@ -8,8 +8,7 @@
 
 void proc_file(char *filename, stack_t **stack)
 {
-	char *line = NULL;
-	char *opcode;
+	char *line = NULL, *opcode;
 	size_t len = 0;
 	unsigned int line_number = 0;
 	FILE *file = fopen(filename, "r");
