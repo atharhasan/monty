@@ -1,6 +1,6 @@
 #include "monty.h"
 
-/*
+/**
  * add - adds the top two elements of the stack
  * @stack: pointer to the stack
  * @line_number: line number in the file
@@ -23,4 +23,16 @@ void add(stack_t **stack, unsigned int line_number)
 	*stack = top2;
 	top2->prev = NULL;
 	free(top1);
+}
+
+/**
+ * nop - Does nothing.
+ * @stack: pointing to top node of the stack.
+ * @line_number: number of of the opcode line as an Integer.
+ */
+
+void nop(stack_t **stack, unsigned int line_number)
+{
+	(void)stack;
+	(void)line_number;
 }

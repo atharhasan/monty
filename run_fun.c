@@ -2,11 +2,9 @@
 
 /**
  * run_fun - Runs the required function.
- * @func: Pointer to the function
  * @op: string of the opcode.
  * @val: A numeric value string
  * @ln: line numeber
- * @format: Format specifier. 0 for a stack.
  * 1 for a queue.
  */
 
