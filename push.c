@@ -8,27 +8,19 @@
 void push(stack_t **stack, unsigned int line)
 {
     char *value_str;
-    char *endptr;
     int value;
     stack_t *new_node;
-
+    
     value_str = strtok(NULL, " ");
-    if (value_str == NULL)
+    if (value_str == NULL || !isInteger(value_str) )
     {
         fprintf(stderr, "L%u: usage: push integer\n", line);
         exit(EXIT_FAILURE);
     }
-
-    value = strtol(value_str, &endptr, 10);
-
-    if (*endptr != '\0' && !isspace((unsigned char)*endptr))
-    {
-        fprintf(stderr, "L%u: usage: push integer\n", line);
-        exit(EXIT_FAILURE);
-    }
+    value = atoi(value_str);
 
     new_node = malloc(sizeof(stack_t));
-    if (new_node == NULL )
+    if (new_node == NULL)
     {
         fprintf(stderr, "Error: malloc failed\n");
         exit(EXIT_FAILURE);
@@ -41,7 +33,6 @@ void push(stack_t **stack, unsigned int line)
     if (*stack == NULL)
     {
         *stack = new_node;
-        return;
     }
     else
     {
@@ -49,4 +40,19 @@ void push(stack_t **stack, unsigned int line)
         (*stack)->prev = new_node;
         *stack = new_node;
     }
+}
+
+
+int isInteger(char *str)
+{
+    if (*str == '-' || *str == '+') {
+        str++;
+    }
+    while (*str != '\0') {
+        if (*str < '0' || *str > '9') {
+            return 0;
+        }
+        str++;
+    }
+    return 1;
 }
