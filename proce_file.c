@@ -15,9 +15,10 @@ void proc_file(char *filename, stack_t **stack)
 	FILE *file = fopen(filename, "r");
 
 	if (file == NULL || filename == NULL)
+	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
 		exit(EXIT_FAILURE);
-
+	}
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
