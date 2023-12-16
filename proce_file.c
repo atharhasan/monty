@@ -102,6 +102,8 @@ void get_func(char *opcode, char *value, int line_number)
 		{"pint", pint},
 		{"pop", pop},
 		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
 		{NULL, NULL}};
 
 	if (opcode[0] == '#')
