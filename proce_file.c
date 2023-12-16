@@ -5,7 +5,7 @@ void proc_file(char *filename, stack_t **stack)
 	char *line = NULL;
 	char *opcode;
 	size_t len = 0;
-	unsigned int line_number = 0;
+	unsigned int line_number = 1;
 	FILE *file = fopen(filename, "r");
 
 	if (file == NULL || filename == NULL)
@@ -46,8 +46,7 @@ void proc_file(char *filename, stack_t **stack)
  * @format: storage format. If 0 Nodes will be entered as a stack.
  * if 1 nodes will be entered as a queue.
  * Return: Returns same as Format
- */
-int sper_line(char *line, int line_number, int format)
+ int sper_line(char *line, int line_number, int format)
 {
 	char *opcode, *val;
 	const char *delim = "\n ";
@@ -71,7 +70,7 @@ int sper_line(char *line, int line_number, int format)
 	return (format);
 }
 
-/**
+
  * get_func - get the appropriate function for the opcode
  * @opcode: opcode
  * @val: argument of the opcode
@@ -79,7 +78,6 @@ int sper_line(char *line, int line_number, int format)
  * @line_number: line number
  * if 1 nodes will be entered as a queue.
  * Return: void
- */
 
 void get_func(char *opcode, char *value, int line_number)
 {
@@ -108,4 +106,5 @@ void get_func(char *opcode, char *value, int line_number)
 		fprintf(stderr, "L%d: unknown instruction %s\n", line_number, opcode);
 		exit(EXIT_FAILURE);
 	}
-}
+	*/
+
