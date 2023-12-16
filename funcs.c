@@ -38,26 +38,30 @@ void nop(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * sub - Adds the top two elements of the stack.
- * @stack: Pointer to a pointer pointing to top node of the stack.
- * @line_number: Interger representing the line number of of the opcode.
+ * sub - subtracts the top element of the stack from the second top element
+ * @stack: pointer to the stack
+ * @line_number: line number in the file
  */
+
 void sub(stack_t **stack, unsigned int line_number)
 {
-	int sub;
+	stack_t *top1, *top2;
 
-	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+	if (*stack == NULL || (*stack)->next == NULL)
 	{
-		fprintf(stderr, "L%u:  can't sub, stack too short\n", line_number);
+		fprintf(stderr, "L%u: can't sub, stack too short\n", line_number);
 		exit(EXIT_FAILURE);
 	}
 
-	(*stack) = (*stack)->next;
-	sub = (*stack)->n - (*stack)->prev->n;
-	(*stack)->n = sub;
-	free((*stack)->prev);
-	(*stack)->prev = NULL;
+	top1 = *stack;
+	top2 = top1->next;
+
+	top2->n -= top1->n;
+	*stack = top2;
+	top2->prev = NULL;
+	free(top1);
 }
+
 
 /**
  * divs - divsides the second top element of the stack by the top element
