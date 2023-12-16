@@ -29,6 +29,10 @@ void proc_file(char *filename, stack_t **stack)
 				pall(stack, line_number);
 			else if (strcmp(opcode, "pint") == 0)
 				pint(stack, line_number);
+			else if (strcmp(opcode, "pop") == 0)
+				pop(stack, line_number);
+			else if (strcmp(opcode, "swap") == 0)
+				swap(stack, line_number);
 			else
 			{
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
@@ -91,7 +95,9 @@ void get_func(char *opcode, char *value, int line_number)
 	instruction_t func_arr[] = {
 		{"push", push},
 		{"pall", pall},
-		{"pint", pint},  
+		{"pint", pint},
+		{"pop", pop},
+		{"swap", swap},  
 		{NULL, NULL}};
 
 	if (opcode[0] == '#')

@@ -50,6 +50,10 @@ int sper_line(char *line, int line_number, int format);
 void get_func(char *opcode, char *value, int line_number);
 void run_fun( char *op, char *val, int ln);
 void pint(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+
+
 
 
 #endif
