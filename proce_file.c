@@ -2,14 +2,12 @@
 
 void proc_file(char *filename, stack_t **stack)
 {
-	
 	char *line = NULL;
+	char *opcode;
 	size_t len = 0;
 	unsigned int line_number = 1;
-	int format = 0;
 	FILE *file = fopen(filename, "r");
 
-	(void) stack;
 	if (file == NULL || filename == NULL)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", filename);
@@ -19,7 +17,7 @@ void proc_file(char *filename, stack_t **stack)
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
-		/*line[strcspn(line, "\n")] = '\0';
+		line[strcspn(line, "\n")] = '\0';
 
 		opcode = strtok(line, " ");
 
@@ -34,8 +32,7 @@ void proc_file(char *filename, stack_t **stack)
 				fprintf(stderr, "L%u: unknown instruction %s\n", line_number, opcode);
 				exit(EXIT_FAILURE);
 			}
-		}*/
-		format = sper_line(line, line_number, format);
+		}
 	}
 
 	free(line);
