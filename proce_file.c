@@ -1,5 +1,10 @@
 #include "monty.h"
 
+/**
+ * proc_file - the way we deal with the functions
+ * @filename: the file taken from the user
+ * @stack: Something I didn't get clearly
+*/
 void proc_file(char *filename, stack_t **stack)
 {
 	char *line = NULL;
@@ -18,9 +23,7 @@ void proc_file(char *filename, stack_t **stack)
 	{
 		line_number++;
 		line[strcspn(line, "\n")] = '\0';
-
 		opcode = strtok(line, " ");
-
 		if (opcode != NULL)
 		{
 			if (strcmp(opcode, "push") == 0)
@@ -40,7 +43,6 @@ void proc_file(char *filename, stack_t **stack)
 			}
 		}
 	}
-
 	free(line);
 	fclose(file);
 }
@@ -80,8 +82,7 @@ int sper_line(char *line, int line_number, int format)
 /**
  * get_func - get the appropriate function for the opcode
  * @opcode: opcode
- * @val: argument of the opcode
- * @format:  storage format. If 0 Nodes will be entered as a stack.
+ * @value: argument of the opcode
  * @line_number: line number
  * if 1 nodes will be entered as a queue.
  * Return: void
@@ -97,7 +98,7 @@ void get_func(char *opcode, char *value, int line_number)
 		{"pall", pall},
 		{"pint", pint},
 		{"pop", pop},
-		{"swap", swap},  
+		{"swap", swap},
 		{NULL, NULL}};
 
 	if (opcode[0] == '#')
