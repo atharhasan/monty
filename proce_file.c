@@ -5,7 +5,7 @@ void proc_file(char *filename, stack_t **stack)
 	char *line = NULL;
 	char *opcode;
 	size_t len = 0;
-	unsigned int line_number = 1;
+	unsigned int line_number = 0;
 	FILE *file = fopen(filename, "r");
 
 	if (file == NULL || filename == NULL)
@@ -47,7 +47,7 @@ void proc_file(char *filename, stack_t **stack)
  * if 1 nodes will be entered as a queue.
  * Return: Returns same as Format
  */
- int sper_line(char *line, int line_number, int format)
+int sper_line(char *line, int line_number, int format)
 {
 	char *opcode, *val;
 	const char *delim = "\n ";
@@ -79,7 +79,8 @@ void proc_file(char *filename, stack_t **stack)
  * @line_number: line number
  * if 1 nodes will be entered as a queue.
  * Return: void
-*/
+ */
+
 void get_func(char *opcode, char *value, int line_number)
 {
 	int j;
@@ -108,4 +109,3 @@ void get_func(char *opcode, char *value, int line_number)
 		exit(EXIT_FAILURE);
 	}
 }
-
